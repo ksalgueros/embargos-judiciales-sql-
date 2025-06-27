@@ -33,3 +33,21 @@ ORDER BY TotalEmbargado DESC;
 SELECT *
 FROM Historico2024
 WHERE Status LIKE 'Proceso Pendiente%';
+
+
+SELECT
+    CASE
+        WHEN SumaEmbargable > 19910 THEN 'Alta'
+        WHEN SumaEmbargable BETWEEN 9961 AND 19910 THEN 'Media'
+        ELSE 'Baja'
+    END AS Prioridad,
+    COUNT(*) AS CantidadCasos,
+    AVG(Monto) AS PromedioMonto,
+    AVG(SumaEmbargable) AS PromedioEmbargable
+FROM Enero2025
+GROUP BY 
+    CASE
+        WHEN SumaEmbargable > 19910 THEN 'Alta'
+        WHEN SumaEmbargable BETWEEN 9961 AND 19910 THEN 'Media'
+        ELSE 'Baja'
+    END;
