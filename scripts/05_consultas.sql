@@ -21,5 +21,15 @@ SELECT * FROM Enero2025 WHERE SumaEmbargable > 9960 AND SumaEmbargable <= 19910;
 -- 4) Prioridad 3
 SELECT * FROM Enero2025 WHERE SumaEmbargable <= 9960;
 
--- 5) Auditoría de montos inconsistentes
+-- 5) AuditorÃ­a de montos inconsistentes
 SELECT * FROM Enero2025 WHERE Monto > SumaEmbargable; 
+
+SELECT 
+    NumeroCliente,NombreDemandado,COUNT(*) AS TotalExpedientes,SUM(Monto) AS TotalEmbargado
+FROM Enero2025
+GROUP BY NumeroCliente,NombreDemandado
+ORDER BY TotalEmbargado DESC;
+
+SELECT *
+FROM Historico2024
+WHERE Status LIKE 'Proceso Pendiente%';
